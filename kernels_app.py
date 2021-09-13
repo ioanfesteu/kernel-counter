@@ -174,7 +174,8 @@ uploaded_file = st.sidebar.file_uploader('',
                                          type=['png', 'jpg', 'jpeg'],
                                          accept_multiple_files=False)
 
-#st.sidebar.write('[Find additional images on Roboflow.](https://public.roboflow.com/object-detection/bccd/)')
+st.sidebar.write("")
+st.sidebar.write('[Find the public dataset on Roboflow.](https://app.roboflow.com/public-yupt3/kernels-counter/overview)')
 st.sidebar.write("")
 
 ## Add in sliders.
