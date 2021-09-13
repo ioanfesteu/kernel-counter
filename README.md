@@ -8,3 +8,5 @@ Inspired from https://github.com/roboflow-ai/streamlit-bccd
   * Run streamlit from app folder: streamlit run kernels_app.py
   
 Sample images for inferencing can be found in "samples" folder.
+
+![Detected soybeans in image](/detected/detected_small.jpg)
