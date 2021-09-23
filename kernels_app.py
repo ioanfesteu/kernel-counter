@@ -14,10 +14,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import time
 import pydeck as pdk
+import constants
 
 # objects_no = 0
 # confidences_all = []
 
+API_KEY = constants.PUBLIC_API_KEY
 
 def get_exif(image):
     #img = Image.open(image)
@@ -82,7 +84,7 @@ def fetch_files(patches):
                 ############# PRIVATE SOYBEAN DATATSET ################ 
                 # upload_url = ''.join([
                 #     "https://detect.roboflow.com/soybeans-5bmvv/",
-                #     "4?api_key=XGmIwM8Y1Gn1V2mKnBvs",
+                #     "4?api_key=" + API_KEY,
                 #     f'&overlap={overlap_threshold * 100}',
                 #     f'&confidence={confidence_threshold * 100}'
                 # ])
@@ -90,7 +92,7 @@ def fetch_files(patches):
                 ############# PUBLIC SOYBEAN DATASET ##################
                 upload_url = ''.join([
                     "https://detect.roboflow.com/kernels-counter/",
-                    "1?api_key=XQR79mc1f6qTx80AU06C",
+                    "1?api_key=" + API_KEY,
                     f'&overlap={overlap_threshold * 100}',
                     f'&confidence={confidence_threshold * 100}'
                 ])
@@ -165,7 +167,7 @@ hide_st_style = """
             header {visibility: hidden;}
             </style>
             """
-st.markdown(hide_st_style, unsafe_allow_html=True)
+#st.markdown(hide_st_style, unsafe_allow_html=True)
 
 ############################# Sidebar ###########################
 # Add in location to select image.
@@ -184,8 +186,14 @@ st.sidebar.write("")
 overlap_threshold = st.sidebar.slider('Overlap threshold: What is the maximum amount of overlap permitted between visible bounding boxes?', 0.0, 1.0, 0.5, 0.01)
 
 st.sidebar.write("")
-image = Image.open('./images/ilogic.png')
+image = Image.open('./images/agrilogic.png')
 st.sidebar.image(image, use_column_width=True)
+#st.sidebar.write("")
+
+#st.sidebar.markdown("Social links")
+link = '[GitHub](https://github.com/ioanfesteu/kernel-counter)'
+# st.sidebar.markdown("<h1 style='text-align: center; color: red;'> link </h1>", unsafe_allow_html=True)
+st.sidebar.markdown(link, unsafe_allow_html=True)
 
 
 ############################# Main app ###########################
@@ -230,7 +238,7 @@ with open("./detected/detected.jpg", "rb") as file:
     )
 
 #st.write(f"Inference time: {round(end-start)} seconds")
-st.write(f"### Number of objects detected: {objects_no}")
+st.write(f"### Number of soybeans detected: {objects_no}")
 #unpatch_image(patches)
 
 ## Histogram in main app.
@@ -265,7 +273,7 @@ with st.expander("Geotagged image"):
     initial_view_state=pdk.ViewState(
         latitude=latitude,
         longitude=longitude,
-        zoom=15,
+        zoom=16,
         pitch=0,
         ),
     layers=[
